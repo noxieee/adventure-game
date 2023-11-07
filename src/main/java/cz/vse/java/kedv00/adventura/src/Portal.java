@@ -127,42 +127,4 @@ public class Portal implements IPortal
      */
     @Override
     public IGame game() { return Game.getInstance(); }
-
-    /***************************************************************************
-     * Metoda testuje danou hladinu rozpracovanosti aplikace,
-     * zde definici šťastného scénáře.
-     *
-     * @param args Parametry příkazového řádku
-     */
-    public static void main(String[] args)
-    {
-        if(args.length > 0 && args[0].equals("-test"))
-        {
-            PortalTester.VERBOSE = true;
-            var portal = new Portal();
-            var tester = new PortalTester(portal, Level.WHOLE);
-            tester.test();
-        }
-        else if(args.length > 0 && args[0].equals("-gui"))
-        {
-            System.out.println("Not implemented yet.");
-        }
-        else {
-            Game game = Game.getInstance();
-            Scanner input = new Scanner(System.in);
-            String userInput;
-
-            while (!game.isAlive()) {
-                System.out.println("Zmáčkni ENTER pro odstartování hry.");
-                userInput = input.nextLine();
-                System.out.println(game.executeCommand(userInput));
-            }
-
-            while (game.isAlive()) {
-                System.out.println("\nZadej příkaz:\n>");
-                userInput = input.nextLine();
-                System.out.println(game.executeCommand(userInput));
-            }
-        }
-    }
 }

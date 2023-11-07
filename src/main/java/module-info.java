@@ -1,7 +1,7 @@
-module cz.vse.java.kedv00.adventura {
+module cz.vse.java.kedv00.adventura.main {
     requires javafx.controls;
     requires javafx.fxml;
 
-    opens cz.vse.java.kedv00.adventura to javafx.fxml;
-    exports cz.vse.java.kedv00.adventura;
+    opens cz.vse.java.kedv00.adventura.main to javafx.fxml;
+    exports cz.vse.java.kedv00.adventura.main;
 }
