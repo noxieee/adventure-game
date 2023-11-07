@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane fx:controller="cz.vse.java.kedv00.adventura.main.HomeController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
     <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" />
   </columnConstraints>
@@ -41,13 +41,13 @@
           </Menu>
         </menus>
       </MenuBar>
-      <TextArea GridPane.rowIndex="1">
+      <TextArea fx:id="consoleOutput" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets left="10.0" right="10.0" top="10.0" />
          </GridPane.margin></TextArea>
       <HBox spacing="10.0" GridPane.rowIndex="2">
          <children>
-            <TextField HBox.hgrow="ALWAYS">
+            <TextField fx:id="userInput" onAction="#sendUserInput" HBox.hgrow="ALWAYS">
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
@@ -55,7 +55,7 @@
                   <Insets />
                </HBox.margin>
             </TextField>
-            <Button mnemonicParsing="false" text="Zpracovat" HBox.hgrow="NEVER">
+            <Button onAction="#sendUserInput" mnemonicParsing="false" text="Zpracovat" HBox.hgrow="NEVER">
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
