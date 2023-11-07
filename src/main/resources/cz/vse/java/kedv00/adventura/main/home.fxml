@@ -24,19 +24,10 @@
    <children>
       <MenuBar GridPane.columnSpan="2147483647">
         <menus>
-          <Menu mnemonicParsing="false" text="File">
+          <Menu mnemonicParsing="false" text="Hra">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+                <MenuItem onAction="#newGame" mnemonicParsing="false" text="Nová hra" />
+                <MenuItem onAction="#closeGame" mnemonicParsing="false" text="Zavřít hru" />
             </items>
           </Menu>
         </menus>
