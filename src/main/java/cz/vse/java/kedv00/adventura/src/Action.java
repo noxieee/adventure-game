@@ -194,8 +194,11 @@ public class Action extends ANamed implements IAction
     private static String HELP(String[] arguments)
     {
         Collection<Action> actions = allActions();
-        Collection<IItem> items = World.getInstance().currentPlace().items();
-        List<IItem> itemsAsList = new ArrayList<>(items);
+        Collection<IItem> placeItems = World.getInstance().currentPlace().items();
+        List<IItem> placeItemsAsList = new ArrayList<>(placeItems);
+        Collection<IItem> bagItems = Game.getInstance().bag().items();
+        List<IItem> bagItemsAsList = new ArrayList<>(bagItems);
+
 
         StringBuilder sb = new StringBuilder(HELP_TEXT);
         for(Action action : actions)
@@ -216,11 +219,23 @@ public class Action extends ANamed implements IAction
 
         sb.append("\n\n").append("Předměty v tomto prostoru:\n");
 
-        for(IItem item : itemsAsList)
+        for(IItem item : placeItemsAsList)
         {
             sb.append(item.name());
 
-            if(!itemsAsList.get(itemsAsList.size() - 1).equals(item))
+            if(!placeItemsAsList.get(placeItemsAsList.size() - 1).equals(item))
+            {
+                sb.append(", ");
+            }
+        }
+
+        sb.append("\n\n").append("Předměty v rukou:\n");
+
+        for(IItem item : bagItemsAsList)
+        {
+            sb.append(item.name());
+
+            if(!bagItemsAsList.get(bagItemsAsList.size() - 1).equals(item))
             {
                 sb.append(", ");
             }

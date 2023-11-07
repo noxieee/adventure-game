@@ -43,7 +43,7 @@ public class Scenarios
 
     /** Text popisující nápovědu */
     static String HELP_TEXT =
-            "\nNÁPOVĚDA\n" + SUBJECT + "\n" + "MŮŽETE ZADAT TYTO PŘÍKAZY:";
+            "NÁPOVĚDA\n" + SUBJECT + "\n" + "MŮŽETE ZADAT TYTO PŘÍKAZY:";
 
     // Texty popisující reakci hry na start a úspěšné dokončení hry
     static String GAME_START_TEXT =
@@ -52,7 +52,7 @@ public class Scenarios
     static String GAME_WIN_TEXT =
             "Výborně, splnil jsi maminčiny úkoly a nyní\n" +
             "můžeš prokrastinovat u hraní videoher!\n" +
-            "Úspěšně jsi dohrál hru.";
+            "Úspěšně jsi dohrál hru. Pro novou hru zmáčkni ENTER.";
 
     // Názvy příkazů
     static String COMMAND_TAKE = "Vezmi";
@@ -91,7 +91,7 @@ public class Scenarios
     static String COMMAND_PUT_DESC = "Položil jsi objekt: ";
     static String COMMAND_GOTO_DESC = "Přesunul ses do prostoru: ";
     static String COMMAND_END_DESC = "Ukončil jsi hru.\n" +
-                                     "Děkuji, že sis zahrál.";
+                                     "Děkuji, že sis zahrál. Pro novou hru zmáčkni ENTER.";
     static String COMMAND_WASH_DESC = "Umyl jsi objekt: ";
     static String COMMAND_WATER_DESC = "Zalil jsi objekt: ";
     static String COMMAND_FEED_DESC = "Nakrmil jsi objekt: ";
