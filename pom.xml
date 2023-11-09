@@ -6,7 +6,7 @@
 
     <groupId>cz.vse.java.kedv00</groupId>
     <artifactId>adventura</artifactId>
-    <version>1.4.0</version>
+    <version>1.5.0</version>
     <name>adventura</name>
 
     <properties>
@@ -60,11 +60,11 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>cz.vse.java.kedv00.adventura/cz.vse.java.kedv00.adventura.HelloApplication
+                            <mainClass>cz.vse.java.kedv00.adventura/cz.vse.java.kedv00.adventura.main.Start
                             </mainClass>
-                            <launcher>app</launcher>
-                            <jlinkZipName>app</jlinkZipName>
-                            <jlinkImageName>app</jlinkImageName>
+                            <launcher>${artifactId}</launcher>
+                            <jlinkZipName>${artifactId}-${project.version}</jlinkZipName>
+                            <jlinkImageName>${artifactId}</jlinkImageName>
                             <noManPages>true</noManPages>
                             <stripDebug>true</stripDebug>
                             <noHeaderFiles>true</noHeaderFiles>

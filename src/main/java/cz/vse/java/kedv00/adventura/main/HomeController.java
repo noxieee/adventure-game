@@ -42,7 +42,7 @@ public class HomeController
     @FXML
     private void closeGame(ActionEvent actionEvent)
     {
-        Alert exitGameAlert = new Alert(Alert.AlertType.CONFIRMATION, "Jsi si jistý, že chceš zavřít hru?.");
+        Alert exitGameAlert = new Alert(Alert.AlertType.CONFIRMATION, "Jsi si jistý, že chceš zavřít hru?");
         Optional<ButtonType> result = exitGameAlert.showAndWait();
 
         if(result.isPresent() && result.get() == ButtonType.OK)

@@ -1,0 +1,10 @@
+image maven: maven:3.8-openjdk-17
+
+build:
+  script:
+      - "mvn javafx:jlink -B"
+  artifacts:
+    paths:
+      - "target/*.zip"
+  only:
+    - master

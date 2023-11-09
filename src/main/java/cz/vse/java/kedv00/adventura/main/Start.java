@@ -48,7 +48,7 @@ public class Start extends Application
 
             Platform.exit();
         }
-        else if(args.length > 0 && args[0].equals("-gui"))
+        else
         {
             launch();
         }

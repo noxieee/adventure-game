@@ -1,4 +1,4 @@
-module cz.vse.java.kedv00.adventura.main {
+module cz.vse.java.kedv00.adventura {
     requires javafx.controls;
     requires javafx.fxml;
 
