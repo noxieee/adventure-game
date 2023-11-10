@@ -18,7 +18,7 @@ import java.util.Collection;
  * @author  Rudolf PECINOVSKÝ
  * @version 2023_Summer
  */
-public interface IWorld
+public interface IWorld extends Observable
 {
 //\AG== ABSTRACT GETTERS AND SETTERS ===========================================
 

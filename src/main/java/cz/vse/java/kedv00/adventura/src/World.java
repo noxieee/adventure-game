@@ -1,11 +1,9 @@
 package cz.vse.java.kedv00.adventura.src;
 
-import cz.vse.java.kedv00.adventura.api.IPlace;
-import cz.vse.java.kedv00.adventura.api.IWorld;
+import cz.vse.java.kedv00.adventura.api.*;
+import cz.vse.java.kedv00.adventura.api.Observer;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static cz.vse.java.kedv00.adventura.src.Scenarios.*;
@@ -54,6 +52,8 @@ public class World implements IWorld
     /** Aktuální prostor, v němž se nachází hráč. */
     private Place currentPlace;
 
+    private final Map<TypeOfChange, Set<Observer>> observerMap = new HashMap<>();
+
     // INSTANCE CONSTRUCTORS ///////////////////////////////////////////////////
 
     /** Soukromý konstruktor světa zajistí jedinou instanci světa. */
@@ -96,9 +96,39 @@ public class World implements IWorld
         ALL_PLACES = places;
         NAME_TO_PLACE = Map.copyOf(nameToPlace);
         START_PLACE = places.get(0);
+
+        for(TypeOfChange typeOfChange : TypeOfChange.values())
+        {
+            observerMap.put(typeOfChange, new HashSet<>());
+        }
     }
 
     // INSTANCE METHODS ////////////////////////////////////////////////////////
+
+    /*********************************************************
+     * Metoda pro zaregistrování observeru.
+     *
+     * @param typeOfChange Typ změny
+     * @param observer Pozorovatel
+     */
+    @Override
+    public void registerObserver(TypeOfChange typeOfChange, Observer observer)
+    {
+        observerMap.get(typeOfChange).add(observer);
+    }
+
+    /******************************************************
+     * Metoda pro upozornění observerů ohledně změny
+     *
+     * @param typeOfChange typ změny
+     */
+    private void notifyObservers(TypeOfChange typeOfChange)
+    {
+        for(Observer obs : observerMap.get(typeOfChange))
+        {
+            obs.update();
+        }
+    }
 
     /***************************************************************************
      * Vrátí kolekci odkazů na všechny prostory vystupující ve hře.
@@ -146,6 +176,8 @@ public class World implements IWorld
     public void setCurrentPlace(IPlace destinationRoom)
     {
         currentPlace = (Place)destinationRoom;
+
+        notifyObservers(TypeOfChange.CHANGE_OF_PLACE);
     }
 
     /***************************************************************************
@@ -160,6 +192,6 @@ public class World implements IWorld
             place.initialize();
         }
 
-        currentPlace = START_PLACE;
+        setCurrentPlace(START_PLACE);
     }
 }

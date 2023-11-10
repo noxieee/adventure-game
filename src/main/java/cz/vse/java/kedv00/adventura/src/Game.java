@@ -1,9 +1,7 @@
 package cz.vse.java.kedv00.adventura.src;
 
 import cz.vse.java.kedv00.adventura.api.*;
-
-import java.util.Collection;
-import java.util.Map;
+import java.util.*;
 
 import static cz.vse.java.kedv00.adventura.src.Scenarios.*;
 

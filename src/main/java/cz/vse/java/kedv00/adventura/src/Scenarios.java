@@ -28,7 +28,7 @@ public class Scenarios
     /** Text popisující cíl hry a způsob jeho dosažení
      *  použitý jako uvítání hráče při startu hry a také při vyvolání nápovědy.
      */
-    static String SUBJECT =
+    static final String SUBJECT =
             "\nJsi líný teenager bydlící s rodiči. Po škole jen hraješ\n" +
             "videohry a do ničeho jiného se ti moc nechce. Nerad po sobě\n" +
             "uklízíš, podle toho také vypadá tvůj pokoj. Tvou mamku to už\n" +
@@ -42,126 +42,126 @@ public class Scenarios
             "Až potom můžeš hrát videohry. Cílem hry je tedy zahrát si.\n";
 
     /** Text popisující nápovědu */
-    static String HELP_TEXT =
+    static final String HELP_TEXT =
             "NÁPOVĚDA\n" + SUBJECT + "\n" + "MŮŽETE ZADAT TYTO PŘÍKAZY:";
 
     // Texty popisující reakci hry na start a úspěšné dokončení hry
-    static String GAME_START_TEXT =
+    static final String GAME_START_TEXT =
             "Vítej hráči!\n" + SUBJECT +
             "\nNebudeš-li si vědět rady, zadej znak ?, jenž zobrazí nápovědu.";
-    static String GAME_WIN_TEXT =
+    static final String GAME_WIN_TEXT =
             "Výborně, splnil jsi maminčiny úkoly a nyní\n" +
             "můžeš prokrastinovat u hraní videoher!\n" +
             "Úspěšně jsi dohrál hru. Pro novou hru zmáčkni ENTER.";
 
     // Názvy příkazů
-    static String COMMAND_TAKE = "Vezmi";
-    static String COMMAND_PUT = "Polož";
-    static String COMMAND_GOTO = "Jdi";
-    static String COMMAND_HELP = "?";
-    static String COMMAND_END = "Konec";
-    static String COMMAND_WASH = "Umyj";
-    static String COMMAND_WATER = "Zalij";
-    static String COMMAND_FEED = "Nakrm";
-    static String COMMAND_WIN = "Hrát_pc_hry";
+    static final String COMMAND_TAKE = "Vezmi";
+    static final String COMMAND_PUT = "Polož";
+    public static final String COMMAND_GOTO = "Jdi";
+    static final String COMMAND_HELP = "?";
+    public final static String COMMAND_END = "Konec";
+    static final String COMMAND_WASH = "Umyj";
+    static final String COMMAND_WATER = "Zalij";
+    static final String COMMAND_FEED = "Nakrm";
+    static final String COMMAND_WIN = "Hrát_pc_hry";
 
     // Názvy předmětů
-    static String PLATE_NAME = "Talíř";
-    static String BOWL_NAME = "Miska";
-    static String KNIFE_NAME = "Nůž";
-    static String CAT_NAME = "Kočka";
-    static String LILY_NAME = "Lilie";
-    static String MONSTERA_NAME = "Monstera";
-    static String TABLE_NAME = "Stůl";
+    static final String PLATE_NAME = "Talíř";
+    static final String BOWL_NAME = "Miska";
+    static final String KNIFE_NAME = "Nůž";
+    static final String CAT_NAME = "Kočka";
+    static final String LILY_NAME = "Lilie";
+    static final String MONSTERA_NAME = "Monstera";
+    static final String TABLE_NAME = "Stůl";
 
     // Kódy typů předmětů
-    static char UNMOVABLE = '#';
-    static char MOVABLE = '^';
+    static final char UNMOVABLE = '#';
+    static final char MOVABLE = '^';
 
     // Názvy prostorů
-    static String BEDROOM_NAME = "Pokoj";
-    static String HALLWAY_NAME = "Chodba";
-    static String BATHROOM_NAME = "Koupelna";
-    static String SINK_NAME = "Dřez";
-    static String BALCONY_NAME = "Balkon";
-    static String KITCHEN_NAME = "Kuchyně";
+    static final String BEDROOM_NAME = "Pokoj";
+    static final String HALLWAY_NAME = "Chodba";
+    static final String BATHROOM_NAME = "Koupelna";
+    static final String SINK_NAME = "Dřez";
+    static final String BALCONY_NAME = "Balkon";
+    static final String KITCHEN_NAME = "Kuchyně";
 
     // Reakce hry na úspěšné provedení příkazů
-    static String COMMAND_TAKE_DESC = "Vzal jsi do rukou objekt: ";
-    static String COMMAND_PUT_DESC = "Položil jsi objekt: ";
-    static String COMMAND_GOTO_DESC = "Přesunul ses do prostoru: ";
-    static String COMMAND_END_DESC = "Ukončil jsi hru.\n" +
+    static final String COMMAND_TAKE_DESC = "Vzal jsi do rukou objekt: ";
+    static final String COMMAND_PUT_DESC = "Položil jsi objekt: ";
+    static final String COMMAND_GOTO_DESC = "Přesunul ses do prostoru: ";
+    static final String COMMAND_END_DESC = "Ukončil jsi hru.\n" +
                                      "Děkuji, že sis zahrál. Pro novou hru zmáčkni ENTER.";
-    static String COMMAND_WASH_DESC = "Umyl jsi objekt: ";
-    static String COMMAND_WATER_DESC = "Zalil jsi objekt: ";
-    static String COMMAND_FEED_DESC = "Nakrmil jsi objekt: ";
+    static final String COMMAND_WASH_DESC = "Umyl jsi objekt: ";
+    static final String COMMAND_WATER_DESC = "Zalil jsi objekt: ";
+    static final String COMMAND_FEED_DESC = "Nakrmil jsi objekt: ";
 
     // Popisy prostorů po přesunutí se do nich
-    static String BEDROOM_DESC =
+    static final String BEDROOM_DESC =
             "Zde se náchází tvůj stůl s herním počítačem.\n" +
             "Na stole leží/ležel špinavý talíř.\n" +
             "Sousední prostory: " + HALLWAY_NAME;
-    static String HALLWAY_DESC =
+    static final String HALLWAY_DESC =
             "Zde se nachází/nacházela hladová kočka Macík.\n" +
             "Sousední prostory: " +
                     BEDROOM_NAME + ", " +
                     BALCONY_NAME + ", " +
                     KITCHEN_NAME + ", " +
                     BATHROOM_NAME;
-    static String BATHROOM_DESC =
+    static final String BATHROOM_DESC =
             "Zde na okně stojí/stála kytka monstera.\n" +
             "Sousední prostory: " + HALLWAY_NAME;
-    static String SINK_DESC =
+    static final String SINK_DESC =
             "Sem můžeš pokládat předměty a mýt je\n" +
             "příkazem Umyj (název předmětu).\n" +
             "Sousední prostory: " + KITCHEN_NAME;
-    static String BALCONY_DESC =
+    static final String BALCONY_DESC =
             "Zde se nachází/nacházela kytka lilie.\n" +
             "Sousední prostory: " + HALLWAY_NAME;
-    static String KITCHEN_DESC =
+    static final String KITCHEN_DESC =
             "Zde na stole je/byla špinavá miska a nůž.\n" +
             "Sousední prostory: " + SINK_NAME + ", " + HALLWAY_NAME;
 
     // Reakce hry na špatně provedené příkazy
-    static String ERR_EMPTY_COMMAND_GAME_RUNNING =
+    static final String ERR_EMPTY_COMMAND_GAME_RUNNING =
             "Prázdný příkaz lze použít pouze pro start hry. Hra už běží.";
-    static String ERR_START_COMMAND_NOT_EMPTY =
+    static final String ERR_START_COMMAND_NOT_EMPTY =
             "Prvním příkazem není startovací příkaz.\n" +
                     "Hru, která neběží, lze spustit pouze startovacím\n" +
                     "příkazem, který je prázdný řetězec.\n";
-    static String ERR_UNKNOWN_COMMAND = "Neznámý příkaz: ";
-    static String ERR_MOVE_NO_ARG =
+    static final String ERR_UNKNOWN_COMMAND = "Neznámý příkaz: ";
+    static final String ERR_MOVE_NO_ARG =
             "Nevím, kam chceš jít\n" +
                     "Nebylo zadáno jméno prostoru.";
-    static String ERR_TAKE_NO_ARG =
+    static final String ERR_TAKE_NO_ARG =
             "Nevím, co chceš zvednout.\n" +
                     "Nebylo zadáno jméno předmětu.";
-    static String ERR_PUT_NO_ARG =
+    static final String ERR_PUT_NO_ARG =
             "Nevím, co chceš položit.\n" +
                     "Nebylo zadáno jméno předmětu.";
-    static String ERR_BAD_NEIGHBOUR =
+    static final String ERR_BAD_NEIGHBOUR =
             "Do zadaného prostoru se odtud nedá jít: ";
-    static String ERR_BAD_ITEM = "Zadaný předmět v prostoru není: ";
-    static String ERR_UNMOVABLE = "Zadaný předmět nelze zvednout: ";
-    static String ERR_BAG_FULL = "Zadaný předmět už neuneseš: ";
-    static String ERR_NOT_IN_BAG = "Zadaný předmět nedržíš v rukou: ";
-    static String ERR_FEEDABLE_NOT_PRESENT =
+    static final String ERR_BAD_ITEM = "Zadaný předmět v prostoru není: ";
+    static final String ERR_UNMOVABLE = "Zadaný předmět nelze zvednout: ";
+    static final String ERR_BAG_FULL = "Zadaný předmět už neuneseš: ";
+    static final String ERR_NOT_IN_BAG = "Zadaný předmět nedržíš v rukou: ";
+    static final String ERR_FEEDABLE_NOT_PRESENT =
             "V daném prostoru se nenachází nakrmitelný objekt.";
-    static String ERR_WASH_COMMAND_NOT_IN_SINK =
+    static final String ERR_WASH_COMMAND_NOT_IN_SINK =
             "V tomto prostoru nemůžeš umýt objekt: ";
-    static String ERR_WASH_NO_ARG = "Nevím, co mám umýt.";
-    static String ERR_WATER_NO_ARG = "Nevím, co mám zalít.";
-    static String ERR_FEEDED_NOT_PRESENT =
+    static final String ERR_WASH_NO_ARG = "Nevím, co mám umýt.";
+    static final String ERR_WATER_NO_ARG = "Nevím, co mám zalít.";
+    static final String ERR_FEEDED_NOT_PRESENT =
             "V prostoru se nenachází nakrmená kočka.";
-    static String ERR_FEED_NOT_WASHED_WATERED =
+    static final String ERR_FEED_NOT_WASHED_WATERED =
             "Není umyté nádobí a zalité kytky.\n" +
                     "Objekt nelze nakrmit: ";
-    static String ERR_CAT_NOT_FEEDED = "Kočka ještě nebyla nakrmena.";
-    static String ERR_UNWATERABLE = "Objekt nelze zalít: ";
-    static String ERR_UNWASHABLE = "Objekt nelze umýt: ";
-    static String ERR_ALREADY_WASHED = "Objekt byl již umyt: ";
-    static String ERR_ALREADY_WATERED = "Objekt byl již zalit: ";
-    static String ERR_ALREADY_FEEDED = "Objekt byl již nakrmen: ";
+    static final String ERR_CAT_NOT_FEEDED = "Kočka ještě nebyla nakrmena.";
+    static final String ERR_UNWATERABLE = "Objekt nelze zalít: ";
+    static final String ERR_UNWASHABLE = "Objekt nelze umýt: ";
+    static final String ERR_ALREADY_WASHED = "Objekt byl již umyt: ";
+    static final String ERR_ALREADY_WATERED = "Objekt byl již zalit: ";
+    static final String ERR_ALREADY_FEEDED = "Objekt byl již nakrmen: ";
 
     /** Společný startovní krok všech scénářů. */
     private static final ScenarioStep START_STEP = new ScenarioStep(
