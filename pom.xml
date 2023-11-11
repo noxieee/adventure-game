@@ -6,7 +6,7 @@
 
     <groupId>cz.vse.java.kedv00</groupId>
     <artifactId>adventura</artifactId>
-    <version>1.6.0-snapshot</version>
+    <version>1.7.0-snapshot</version>
     <name>adventura</name>
 
     <properties>

@@ -79,12 +79,12 @@ public class Scenarios
     static final char MOVABLE = '^';
 
     // Názvy prostorů
-    static final String BEDROOM_NAME = "Pokoj";
-    static final String HALLWAY_NAME = "Chodba";
-    static final String BATHROOM_NAME = "Koupelna";
-    static final String SINK_NAME = "Dřez";
-    static final String BALCONY_NAME = "Balkon";
-    static final String KITCHEN_NAME = "Kuchyně";
+    public static final String BEDROOM_NAME = "Pokoj";
+    public static final String HALLWAY_NAME = "Chodba";
+    public static final String BATHROOM_NAME = "Koupelna";
+    public static final String SINK_NAME = "Dřez";
+    public static final String BALCONY_NAME = "Balkon";
+    public static final String KITCHEN_NAME = "Kuchyně";
 
     // Reakce hry na úspěšné provedení příkazů
     static final String COMMAND_TAKE_DESC = "Vzal jsi do rukou objekt: ";

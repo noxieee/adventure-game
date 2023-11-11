@@ -7,15 +7,21 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Point2D;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Pair;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
-import static cz.vse.java.kedv00.adventura.src.Scenarios.COMMAND_END;
-import static cz.vse.java.kedv00.adventura.src.Scenarios.COMMAND_GOTO;
+import static cz.vse.java.kedv00.adventura.src.Scenarios.*;
 
 public class HomeController {
+    @FXML
+    private ImageView playerIcon;
     @FXML
     private ListView<IPlace> locationPanel;
     @FXML
@@ -24,6 +30,7 @@ public class HomeController {
     private TextField userInput;
     private final IGame game = Game.getInstance();
     private final ObservableList<IPlace> neighbourLocations = FXCollections.observableArrayList();
+    private final Map<String, Point2D> locationCoords = new HashMap<>();
 
     @FXML
     private void initialize() {
@@ -31,8 +38,16 @@ public class HomeController {
         executeCommand("");
         Platform.runLater(() -> userInput.requestFocus());
         locationPanel.setItems(neighbourLocations);
-        game.world().registerObserver(TypeOfChange.CHANGE_OF_PLACE, this::updateLocationPanel);
+        game.world().registerObserver(TypeOfChange.CHANGE_OF_PLACE,
+                () -> {updateLocationPanel(); updatePlayerCoords();});
+
         updateLocationPanel();
+        locationCoords.put(BEDROOM_NAME, new Point2D(222.0, 239.0));
+        locationCoords.put(HALLWAY_NAME, new Point2D(222.0, 136.0));
+        locationCoords.put(BATHROOM_NAME, new Point2D(222.0, 34.0));
+        locationCoords.put(BALCONY_NAME, new Point2D(349.0, 134.0));
+        locationCoords.put(KITCHEN_NAME, new Point2D(64.0, 134.0));
+        locationCoords.put(SINK_NAME, new Point2D(30.0, 244.0));
     }
 
     @FXML
@@ -59,6 +74,15 @@ public class HomeController {
         userInput.clear();
 
         executeCommand(command);
+    }
+
+    @FXML
+    private void updatePlayerCoords()
+    {
+        IPlace currentPlace = game.world().currentPlace();
+
+        playerIcon.setLayoutX(locationCoords.get(currentPlace.name()).getX());
+        playerIcon.setLayoutY(locationCoords.get(currentPlace.name()).getY());
     }
 
     @FXML

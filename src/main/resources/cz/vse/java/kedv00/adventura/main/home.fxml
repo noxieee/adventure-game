@@ -9,18 +9,23 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vse.java.kedv00.adventura.main.HomeController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="830.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vse.java.kedv00.adventura.main.HomeController">
   <columnConstraints>
     <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints valignment="CENTER" vgrow="NEVER" />
-    <RowConstraints vgrow="SOMETIMES" />
+      <RowConstraints valignment="CENTER" vgrow="NEVER" />
+    <RowConstraints prefHeight="1.0" vgrow="SOMETIMES" />
     <RowConstraints valignment="CENTER" vgrow="NEVER" />
   </rowConstraints>
    <children>
@@ -34,7 +39,35 @@
           </Menu>
         </menus>
       </MenuBar>
-      <HBox spacing="10.0" GridPane.rowIndex="2">
+      <TitledPane animated="false" text="Mapa" GridPane.rowIndex="1">
+         <content>
+            <HBox alignment="TOP_CENTER">
+               <children>
+                  <Pane>
+                     <children>
+                        <ImageView fitHeight="310.0" fitWidth="439.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@map.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="playerIcon" fitHeight="45.0" fitWidth="45.0" layoutX="222.0" layoutY="239.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@player.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+         </content>
+      </TitledPane>
+      <SplitPane dividerPositions="0.3" GridPane.rowIndex="2">
+         <items>
+            <ListView onMouseClicked="#clickLocationPanel" fx:id="locationPanel" />
+            <TextArea fx:id="consoleOutput" editable="false" />
+         </items>
+      </SplitPane>
+      <HBox spacing="10.0" GridPane.rowIndex="3">
          <children>
             <TextField fx:id="userInput" onAction="#sendUserInput" HBox.hgrow="ALWAYS">
                <padding>
@@ -54,11 +87,5 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
       </HBox>
-      <SplitPane dividerPositions="0.3" GridPane.rowIndex="1">
-         <items>
-            <ListView onMouseClicked="#clickLocationPanel" fx:id="locationPanel"/>
-            <TextArea fx:id="consoleOutput" editable="false" />
-         </items>
-      </SplitPane>
    </children>
 </GridPane>
