@@ -1,7 +1,11 @@
 package cz.vse.java.kedv00.adventura.src;
 
-import cz.vse.java.kedv00.adventura.api.IBag;
-import cz.vse.java.kedv00.adventura.api.IItem;
+import cz.vse.java.kedv00.adventura.api.*;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /*******************************************************************************
  * Instance třídy {@code Bag} představuje úložiště,
@@ -16,7 +20,7 @@ import cz.vse.java.kedv00.adventura.api.IItem;
  * @author  Vojtěch KEDER
  * @version 2023_Summer
  */
-public class Bag extends AItemContainer implements IBag
+public class Bag extends AItemContainer implements IBag, Observable
 {
     // CLASS ATTRIBUTES ////////////////////////////////////////////////////////
 
@@ -40,10 +44,20 @@ public class Bag extends AItemContainer implements IBag
     /** Zbývající kapacita batohu. */
     private int remainingCapacity;
 
+    private final Map<TypeOfChange, Set<Observer>> observerMap = new HashMap<>();
+
     // INSTANCE CONSTRUCTORS ///////////////////////////////////////////////////
 
     /** Soukromý konstruktor batohu zajistí jedinou instanci batohu. */
-    private Bag() { super("Ruce"); }
+    private Bag()
+    {
+        super("Ruce");
+
+        for(TypeOfChange typeOfChange : TypeOfChange.values())
+        {
+            observerMap.put(typeOfChange, new HashSet<>());
+        }
+    }
 
     // INSTANCE METHODS ////////////////////////////////////////////////////////
 
@@ -80,6 +94,8 @@ public class Bag extends AItemContainer implements IBag
 
         if (result) { remainingCapacity += item.weight(); }
 
+        notifyObservers(TypeOfChange.CHANGE_OF_BAG_ITEMS);
+
         return result;
     }
 
@@ -97,6 +113,33 @@ public class Bag extends AItemContainer implements IBag
         super.addItem(item);
         remainingCapacity -= item.weight();
 
+        notifyObservers(TypeOfChange.CHANGE_OF_BAG_ITEMS);
+
         return true;
+    }
+
+    /*********************************************************
+     * Metoda pro zaregistrování observeru.
+     *
+     * @param typeOfChange Typ změny
+     * @param observer Pozorovatel
+     */
+    @Override
+    public void registerObserver(TypeOfChange typeOfChange, Observer observer)
+    {
+        observerMap.get(typeOfChange).add(observer);
+    }
+
+    /******************************************************
+     * Metoda pro upozornění observerů ohledně změny
+     *
+     * @param typeOfChange typ změny
+     */
+    private void notifyObservers(TypeOfChange typeOfChange)
+    {
+        for(Observer obs : observerMap.get(typeOfChange))
+        {
+            obs.update();
+        }
     }
 }

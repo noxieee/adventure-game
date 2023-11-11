@@ -16,7 +16,7 @@ Příliš žluťoučký kůň úpěl ďábelské ó - PŘÍLIŠ ŽLUŤOUČKÝ K�
  * @version 2023_Summer
  */
 public interface IBag
-         extends IItemContainer
+         extends IItemContainer, Observable
 {
 //\AG== ABSTRACT GETTERS AND SETTERS ===========================================
 

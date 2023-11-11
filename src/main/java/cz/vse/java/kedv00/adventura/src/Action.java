@@ -159,10 +159,15 @@ public class Action extends ANamed implements IAction
 
         Bag bag = Bag.getInstance();
 
-        if(!bag.addItem(item)) { return ERR_BAG_FULL + itemName; }
-
         Place currentPlace = World.getInstance().currentPlace();
+
         currentPlace.removeItem(item);
+
+        if(!bag.addItem(item))
+        {
+            currentPlace.addItem(item);
+            return ERR_BAG_FULL + itemName;
+        }
 
         return COMMAND_TAKE_DESC + itemName;
     }
@@ -183,8 +188,8 @@ public class Action extends ANamed implements IAction
         if(item == null) { return ERR_NOT_IN_BAG + itemName; }
 
         Place currentPlace = World.getInstance().currentPlace();
-        bag.removeItem(item);
         currentPlace.addItem(item);
+        bag.removeItem(item);
         return COMMAND_PUT_DESC + itemName;
     }
 

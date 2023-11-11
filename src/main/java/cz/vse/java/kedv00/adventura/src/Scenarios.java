@@ -55,8 +55,8 @@ public class Scenarios
             "Úspěšně jsi dohrál hru. Pro novou hru zmáčkni ENTER.";
 
     // Názvy příkazů
-    static final String COMMAND_TAKE = "Vezmi";
-    static final String COMMAND_PUT = "Polož";
+    public static final String COMMAND_TAKE = "Vezmi";
+    public static final String COMMAND_PUT = "Polož";
     public static final String COMMAND_GOTO = "Jdi";
     static final String COMMAND_HELP = "?";
     public final static String COMMAND_END = "Konec";

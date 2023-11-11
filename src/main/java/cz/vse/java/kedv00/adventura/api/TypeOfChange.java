@@ -6,5 +6,6 @@ package cz.vse.java.kedv00.adventura.api;
  */
 public enum TypeOfChange
 {
-    CHANGE_OF_PLACE
+    CHANGE_OF_PLACE,
+    CHANGE_OF_BAG_ITEMS
 }

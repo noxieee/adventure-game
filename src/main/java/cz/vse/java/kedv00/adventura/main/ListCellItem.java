@@ -1,15 +1,15 @@
 package cz.vse.java.kedv00.adventura.main;
 
-import cz.vse.java.kedv00.adventura.api.IPlace;
+import cz.vse.java.kedv00.adventura.api.IItem;
 import javafx.scene.control.ListCell;
 import javafx.scene.image.ImageView;
 
-public class ListCellPlace extends ListCell<IPlace>
+public class ListCellItem extends ListCell<IItem>
 {
     @Override
-    protected void updateItem(IPlace place, boolean b)
+    protected void updateItem(IItem item, boolean b)
     {
-        super.updateItem(place, b);
+        super.updateItem(item, b);
 
         if(b)
         {
@@ -17,8 +17,8 @@ public class ListCellPlace extends ListCell<IPlace>
             setGraphic(null);
         }
         else {
-            setText(place.name());
-            String path = getClass().getResource("place_images/" + place.name().toLowerCase() + ".jpg").toExternalForm();
+            setText(item.name());
+            String path = getClass().getResource("item_images/" + item.name().toLowerCase() + ".jpg").toExternalForm();
             ImageView iw = new ImageView(path);
             iw.setFitHeight(55.0);
             iw.setFitWidth(80.0);
