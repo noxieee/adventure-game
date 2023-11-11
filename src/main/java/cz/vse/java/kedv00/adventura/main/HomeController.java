@@ -8,9 +8,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.web.WebView;
+import javafx.stage.Stage;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -161,7 +164,8 @@ public class HomeController {
         }
     }
 
-    public void clickBagPanel(MouseEvent mouseEvent)
+    @FXML
+    private void clickBagPanel(MouseEvent mouseEvent)
     {
         IItem selectedItem = bagItemsPanel.getSelectionModel().getSelectedItem();
 
@@ -172,7 +176,8 @@ public class HomeController {
         }
     }
 
-    public void clickPlaceItemPanel(MouseEvent mouseEvent)
+    @FXML
+    private void clickPlaceItemPanel(MouseEvent mouseEvent)
     {
         IItem selectedItem = placeItemsPanel.getSelectionModel().getSelectedItem();
 
@@ -181,6 +186,18 @@ public class HomeController {
             String command = COMMAND_TAKE + " " + selectedItem.name();
             executeCommand(command);
         }
+    }
+
+    @FXML
+    private void showHelp(ActionEvent actionEvent)
+    {
+        Stage helpStage = new Stage();
+        helpStage.setTitle("Nápověda");
+        WebView vw = new WebView();
+        Scene helpScene = new Scene(vw);
+        helpStage.setScene(helpScene);
+        helpStage.show();
+        vw.getEngine().load(getClass().getResource("help.html").toExternalForm());
     }
 
     private void executeCommand(String command)
