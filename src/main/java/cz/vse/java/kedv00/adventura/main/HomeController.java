@@ -11,7 +11,6 @@ import javafx.geometry.Point2D;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.util.Pair;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -48,6 +47,8 @@ public class HomeController {
         locationCoords.put(BALCONY_NAME, new Point2D(349.0, 134.0));
         locationCoords.put(KITCHEN_NAME, new Point2D(64.0, 134.0));
         locationCoords.put(SINK_NAME, new Point2D(30.0, 244.0));
+
+        locationPanel.setCellFactory(param -> new ListCellPlace());
     }
 
     @FXML
