@@ -4,6 +4,9 @@ import cz.vse.java.kedv00.adventura.api.IPlace;
 import javafx.scene.control.ListCell;
 import javafx.scene.image.ImageView;
 
+/*******************************************************************************
+ * Třída, která do listview prostorů přidá obrázky na základě jejich jména.
+ */
 public class ListCellPlace extends ListCell<IPlace>
 {
     @Override

@@ -52,6 +52,7 @@ public class World implements IWorld
     /** Aktuální prostor, v němž se nachází hráč. */
     private Place currentPlace;
 
+    /** Mapa observerů. */
     private final Map<TypeOfChange, Set<Observer>> observerMap = new HashMap<>();
 
     // INSTANCE CONSTRUCTORS ///////////////////////////////////////////////////

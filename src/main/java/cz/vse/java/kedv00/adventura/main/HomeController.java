@@ -25,24 +25,48 @@ import static cz.vse.java.kedv00.adventura.src.Scenarios.*;
  * Třída zajišťující správu UI prvků
  */
 public class HomeController {
+
+    /** Panel itemů v prostoru. */
     @FXML
     private ListView<IItem> placeItemsPanel;
-    @FXML
-    private Label bagLabel;
-    @FXML
-    private ListView<IItem> bagItemsPanel;
-    @FXML
-    private ImageView playerIcon;
+
+    /** Panel sousedních prostorů. */
     @FXML
     private ListView<IPlace> locationPanel;
+
+    /** Panel itemů v batohu. */
+    @FXML
+    private ListView<IItem> bagItemsPanel;
+
+    /** Label panelu batohu. */
+    @FXML
+    private Label bagLabel;
+
+    /** Ikona hráče na mapě. */
+    @FXML
+    private ImageView playerIcon;
+
+    /** Konzole, kam se vypisují odpovědi hry. */
     @FXML
     private TextArea consoleOutput;
+
+    /** Textfield pro uživatelský vstup. */
     @FXML
     private TextField userInput;
+
+    /** Reference na instanci hry. */
     private final IGame game = Game.getInstance();
+
+    /** Panel itemů v prostoru. */
     private final ObservableList<IPlace> neighbourLocations = FXCollections.observableArrayList();
+
+    /** List itemů v batohu */
     private final ObservableList<IItem> bagItems = FXCollections.observableArrayList();
+
+    /** List itemů v prostoru */
     private final ObservableList<IItem> placeItems = FXCollections.observableArrayList();
+
+    /** Mapa název prostoru - souřadnice na herním plánu */
     private final Map<String, Point2D> locationCoords = new HashMap<>();
 
     /***************************************************************
@@ -80,7 +104,9 @@ public class HomeController {
         placeItemsPanel.setCellFactory(param -> new ListCellItem());
     }
 
-
+    /***************************************************************
+     * Metoda aktualizující panel sousedních prostorů.
+     */
     @FXML
     private void updateLocationPanel() {
         IPlace currentPlace = game.world().currentPlace();
@@ -94,14 +120,9 @@ public class HomeController {
         }
     }
 
-    @FXML
-    private void updateOnGameEnd()
-    {
-        locationPanel.setDisable(!game.isAlive());
-        bagItemsPanel.setDisable(!game.isAlive());
-        placeItemsPanel.setDisable(!game.isAlive());
-    }
-
+    /***************************************************************
+     * Metoda aktualizující panely itemů v batohu a v prostoru.
+     */
     @FXML
     private void updateItemsPanels() {
         IBag bag = game.bag();
@@ -118,15 +139,9 @@ public class HomeController {
         }
     }
 
-    @FXML
-    private void sendUserInput(ActionEvent actionEvent)
-    {
-        String command = userInput.getText();
-        userInput.clear();
-
-        executeCommand(command);
-    }
-
+    /*******************************************************************
+     * Metoda, která aktualizuje polohu ikony hráče na herním plánu.
+     */
     @FXML
     private void updatePlayerCoords()
     {
@@ -136,6 +151,97 @@ public class HomeController {
         playerIcon.setLayoutY(locationCoords.get(currentPlace.name()).getY());
     }
 
+    /***************************************************************
+     * Metoda aktualizující panel sousedních prostorů.
+     */
+    @FXML
+    private void updateOnGameEnd()
+    {
+        locationPanel.setDisable(!game.isAlive());
+        bagItemsPanel.setDisable(!game.isAlive());
+        placeItemsPanel.setDisable(!game.isAlive());
+    }
+
+    /*******************************************************************
+     * Metoda, která zachycuje click event u panelu sousedních prostorů
+     * a zajišťuje poslání příkazu hře, aby změnila prostor.
+     */
+    @FXML
+    private void clickLocationPanel(MouseEvent mouseEvent)
+    {
+        IPlace selectedLocation = locationPanel.getSelectionModel().getSelectedItem();
+
+        if(selectedLocation != null) {
+            String command = COMMAND_GOTO + " " + selectedLocation.name();
+            executeCommand(command);
+        }
+    }
+
+    /*******************************************************************
+     * Metoda, která zachycuje click event u panelu batohu a zajišťuje
+     * poslání příkazu hře, aby položila item do aktuálního prostoru.
+     */
+    @FXML
+    private void clickBagPanel(MouseEvent mouseEvent)
+    {
+        IItem selectedItem = bagItemsPanel.getSelectionModel().getSelectedItem();
+
+        if(selectedItem != null)
+        {
+            String command = COMMAND_PUT + " " + selectedItem.name();
+            executeCommand(command);
+        }
+    }
+
+    /*******************************************************************
+     * Metoda, která zachycuje click event u panelu itemů v prostoru
+     * a zajišťuje poslání příkazu hře, aby vzala item z aktuálního
+     * prostoru do batohu.
+     */
+    @FXML
+    private void clickPlaceItemPanel(MouseEvent mouseEvent)
+    {
+        IItem selectedItem = placeItemsPanel.getSelectionModel().getSelectedItem();
+
+        if(selectedItem != null)
+        {
+            String command = COMMAND_TAKE + " " + selectedItem.name();
+            executeCommand(command);
+        }
+    }
+
+    /*********************************************************************
+     * Metoda, která čte user input z textfieldu a předává příkaz hře.
+     */
+    @FXML
+    private void sendUserInput(ActionEvent actionEvent)
+    {
+        String command = userInput.getText();
+        userInput.clear();
+
+        executeCommand(command);
+    }
+
+    /*******************************************************************
+     * Metoda, která posílá příkazy hře a popřípadě updatuje panely
+     * na začátku/konci hry.
+     */
+    private void executeCommand(String command)
+    {
+        consoleOutput.appendText("> " + command.toUpperCase() + "\n\n");
+        String gameOutput = game.executeCommand(command);
+        consoleOutput.appendText(gameOutput + "\n\n");
+
+        if(command.equalsIgnoreCase(COMMAND_END) || command.isEmpty())
+        {
+            updateItemsPanels();
+            updateOnGameEnd();
+        }
+    }
+
+    /*******************************************************************
+     * Metoda, která vytvoří alert a případně ukončí hru a zavře okno.
+     */
     @FXML
     private void closeGame(ActionEvent actionEvent)
     {
@@ -149,55 +255,9 @@ public class HomeController {
         }
     }
 
-    @FXML
-    private void newGame(ActionEvent actionEvent)
-    {
-        Alert newGameAlert = new Alert(Alert.AlertType.CONFIRMATION, "Jsi si jistý, že chceš novou hru?");
-        Optional<ButtonType> result = newGameAlert.showAndWait();
-
-        if(result.isPresent() && result.get() == ButtonType.OK)
-        {
-            executeCommand(COMMAND_END);
-            consoleOutput.clear();
-            initialize();
-        }
-    }
-
-    @FXML
-    private void clickLocationPanel(MouseEvent mouseEvent)
-    {
-        IPlace selectedLocation = locationPanel.getSelectionModel().getSelectedItem();
-
-        if(selectedLocation != null) {
-            String command = COMMAND_GOTO + " " + selectedLocation.name();
-            executeCommand(command);
-        }
-    }
-
-    @FXML
-    private void clickBagPanel(MouseEvent mouseEvent)
-    {
-        IItem selectedItem = bagItemsPanel.getSelectionModel().getSelectedItem();
-
-        if(selectedItem != null)
-        {
-            String command = COMMAND_PUT + " " + selectedItem.name();
-            executeCommand(command);
-        }
-    }
-
-    @FXML
-    private void clickPlaceItemPanel(MouseEvent mouseEvent)
-    {
-        IItem selectedItem = placeItemsPanel.getSelectionModel().getSelectedItem();
-
-        if(selectedItem != null)
-        {
-            String command = COMMAND_TAKE + " " + selectedItem.name();
-            executeCommand(command);
-        }
-    }
-
+    /*******************************************************************
+     * Metoda, která zobrazí webview nápovědy.
+     */
     @FXML
     private void showHelp(ActionEvent actionEvent)
     {
@@ -210,11 +270,20 @@ public class HomeController {
         vw.getEngine().load(getClass().getResource("help.html").toExternalForm());
     }
 
-    private void executeCommand(String command)
+    /*******************************************************************
+     * Metoda, která založí novou hru.
+     */
+    @FXML
+    private void newGame(ActionEvent actionEvent)
     {
-        consoleOutput.appendText("> " + command.toUpperCase() + "\n\n");
-        String gameOutput = game.executeCommand(command);
-        consoleOutput.appendText(gameOutput + "\n\n");
-        updateOnGameEnd();
+        Alert newGameAlert = new Alert(Alert.AlertType.CONFIRMATION, "Jsi si jistý, že chceš novou hru?");
+        Optional<ButtonType> result = newGameAlert.showAndWait();
+
+        if(result.isPresent() && result.get() == ButtonType.OK)
+        {
+            executeCommand(COMMAND_END);
+            consoleOutput.clear();
+            initialize();
+        }
     }
 }

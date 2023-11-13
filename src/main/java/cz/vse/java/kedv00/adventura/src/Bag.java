@@ -44,6 +44,7 @@ public class Bag extends AItemContainer implements IBag, Observable
     /** Zbývající kapacita batohu. */
     private int remainingCapacity;
 
+    /** Mapa observerů. */
     private final Map<TypeOfChange, Set<Observer>> observerMap = new HashMap<>();
 
     // INSTANCE CONSTRUCTORS ///////////////////////////////////////////////////
