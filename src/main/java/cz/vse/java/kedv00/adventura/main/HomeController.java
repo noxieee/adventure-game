@@ -105,7 +105,8 @@ public class HomeController {
     }
 
     /***************************************************************
-     * Metoda aktualizující panel sousedních prostorů.
+     * Metoda aktualizující panel sousedních prostorů a panel
+     * předmětů v prostoru.
      */
     @FXML
     private void updateLocationPanel() {
@@ -125,12 +126,11 @@ public class HomeController {
      */
     @FXML
     private void updateItemsPanels() {
-        IBag bag = game.bag();
         IPlace currentPlace = game.world().currentPlace();
 
-        bagLabel.setText("Předměty v rukou (" + bag.items().size() + "/" + bag.capacity() + ")");
+        bagLabel.setText("Předměty v rukou (" + game.bag().items().size() + "/" + game.bag().capacity() + ")");
         bagItems.clear();
-        bagItems.addAll(bag.items());
+        bagItems.addAll(game.bag().items());
 
         if(currentPlace != null)
         {
