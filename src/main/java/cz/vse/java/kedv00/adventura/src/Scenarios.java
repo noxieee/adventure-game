@@ -63,7 +63,7 @@ public class Scenarios
     static final String COMMAND_WASH = "Umyj";
     static final String COMMAND_WATER = "Zalij";
     static final String COMMAND_FEED = "Nakrm";
-    static final String COMMAND_WIN = "Hrát_pc_hry";
+    public static final String COMMAND_WIN = "Hrát_pc_hry";
 
     // Názvy předmětů
     static final String PLATE_NAME = "Talíř";

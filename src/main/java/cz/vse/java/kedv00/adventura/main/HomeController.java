@@ -232,7 +232,7 @@ public class HomeController {
         String gameOutput = game.executeCommand(command);
         consoleOutput.appendText(gameOutput + "\n\n");
 
-        if(command.equalsIgnoreCase(COMMAND_END) || command.isEmpty())
+        if(command.equalsIgnoreCase(COMMAND_END) || command.isEmpty() || command.equalsIgnoreCase(COMMAND_WIN))
         {
             updateItemsPanels();
             updateOnGameEnd();
