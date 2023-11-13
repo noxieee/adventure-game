@@ -3,8 +3,6 @@ package cz.vse.java.kedv00.adventura.src;
 import cz.vse.java.kedv00.adventura.api.IAction;
 import cz.vse.java.kedv00.adventura.api.IItem;
 import cz.vse.java.kedv00.adventura.api.INamed;
-import cz.vse.java.kedv00.adventura.api.Observer;
-import cz.vse.java.kedv00.adventura.api.TypeOfChange;
 
 import java.util.*;
 import java.util.function.Function;

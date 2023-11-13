@@ -21,6 +21,9 @@ import java.util.Optional;
 
 import static cz.vse.java.kedv00.adventura.src.Scenarios.*;
 
+/*******************************************************************
+ * Třída zajišťující správu UI prvků
+ */
 public class HomeController {
     @FXML
     private ListView<IItem> placeItemsPanel;
@@ -42,6 +45,10 @@ public class HomeController {
     private final ObservableList<IItem> placeItems = FXCollections.observableArrayList();
     private final Map<String, Point2D> locationCoords = new HashMap<>();
 
+    /***************************************************************
+     * Inicializační metoda, která nastaví UI do původního stavu
+     * po skončení hry, či při založení nové
+     */
     @FXML
     private void initialize() {
         consoleOutput.clear();
@@ -56,7 +63,7 @@ public class HomeController {
                 () -> {updateLocationPanel(); updatePlayerCoords();});
 
         game.bag().registerObserver(TypeOfChange.CHANGE_OF_BAG_ITEMS,
-                this::updateItemsPanels);
+                () -> updateItemsPanels());
 
         updateLocationPanel();
         updateItemsPanels();
@@ -72,6 +79,7 @@ public class HomeController {
         bagItemsPanel.setCellFactory(param -> new ListCellItem());
         placeItemsPanel.setCellFactory(param -> new ListCellItem());
     }
+
 
     @FXML
     private void updateLocationPanel() {
@@ -90,6 +98,8 @@ public class HomeController {
     private void updateOnGameEnd()
     {
         locationPanel.setDisable(!game.isAlive());
+        bagItemsPanel.setDisable(!game.isAlive());
+        placeItemsPanel.setDisable(!game.isAlive());
     }
 
     @FXML
