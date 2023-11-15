@@ -65,6 +65,8 @@ public class Scenarios
     static final String COMMAND_FEED = "Nakrm";
     public static final String COMMAND_WIN = "Hrát_pc_hry";
 
+    static final String COMMAND_IDKFA = "Idkfa";
+
     // Názvy předmětů
     static final String PLATE_NAME = "Talíř";
     static final String BOWL_NAME = "Miska";
@@ -95,6 +97,7 @@ public class Scenarios
     static final String COMMAND_WASH_DESC = "Umyl jsi objekt: ";
     static final String COMMAND_WATER_DESC = "Zalil jsi objekt: ";
     static final String COMMAND_FEED_DESC = "Nakrmil jsi objekt: ";
+    static final String COMMAND_IDKFA_DESC = "Vzal jsi z prostorů náhodné předměty: ";
 
     // Popisy prostorů po přesunutí se do nich
     static final String BEDROOM_DESC =

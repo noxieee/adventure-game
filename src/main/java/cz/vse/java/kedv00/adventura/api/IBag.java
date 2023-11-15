@@ -30,7 +30,13 @@ public interface IBag
     public int capacity()
     ;
 
-
+    /***************************************************************************
+     * Vrátí zbávající kapacitu batohu.
+     *
+     * @return Zbývající kapacita batohu
+     */
+    public int remainingCapacity()
+    ;
 
 //\AM== REMAINING ABSTRACT METHODS =============================================
 

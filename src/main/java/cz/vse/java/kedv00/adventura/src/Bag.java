@@ -71,6 +71,9 @@ public class Bag extends AItemContainer implements IBag, Observable
     @Override
     public int capacity() { return MAX_CAPACITY; }
 
+    @Override
+    public int remainingCapacity() { return remainingCapacity; }
+
     /***************************************************************************
      * Inicializuje batoh na počátku hry. Vedle inicializace obsahu,
      * inicializuje i informaci o zbývající kapacitě.

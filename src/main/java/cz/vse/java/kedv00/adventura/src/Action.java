@@ -1,8 +1,7 @@
 package cz.vse.java.kedv00.adventura.src;
 
-import cz.vse.java.kedv00.adventura.api.IAction;
-import cz.vse.java.kedv00.adventura.api.IItem;
-import cz.vse.java.kedv00.adventura.api.INamed;
+import cz.vse.java.kedv00.adventura.api.*;
+import javafx.util.Pair;
 
 import java.util.*;
 import java.util.function.Function;
@@ -47,6 +46,9 @@ public class Action extends ANamed implements IAction
 
     /** Rozhodování, jestli hra běží nebo ne */
     private static boolean isAlive = false;
+
+    /** Random generator */
+    private static final Random randomGenerator = new Random();
 
     // STATIC CLASS CONSTRUCTORS ///////////////////////////////////////////////
 
@@ -94,7 +96,10 @@ public class Action extends ANamed implements IAction
                 entry(COMMAND_WIN.toLowerCase(),
                         new Action(COMMAND_WIN, Action::PLAY,
                         "Příkaz vyhraje hru, pokud " +
-                        "se v prostoru nachází nakrmený objekt."))
+                        "se v prostoru nachází nakrmený objekt.")),
+                entry(COMMAND_IDKFA.toLowerCase(),
+                        new Action(COMMAND_IDKFA, Action::IDKFA,
+                        "Příkaz sebere náhodné předměty z prostorů do rukou."))
         );
 
         NAME_TO_FLAG = new HashMap<>();
@@ -114,6 +119,68 @@ public class Action extends ANamed implements IAction
     }
 
     // STATIC CLASS METHODS ////////////////////////////////////////////////////
+
+    /***********************************************************************
+     * Metoda realizující akci IDKFA.
+     *
+     * @return Reakce hry na zadaný příkaz.
+     */
+    private static String IDKFA(String[] arguments)
+    {
+        IGame game = Game.getInstance();
+        int remainingBagCapacity = game.bag().remainingCapacity();
+
+        if(remainingBagCapacity == 0) { return "Už neuneseš žádné další předměty."; }
+
+        List<String> itemsObtained = new ArrayList<>();
+
+        Collection<? extends IPlace> allPlaces = game.world().places();
+        List<Pair<IItem, IPlace>> itemToPlace = new ArrayList<>();
+
+        for(IPlace place : allPlaces)
+        {
+            Collection<IItem> items = place.items();
+
+            for(IItem item : items)
+            {
+                if(item.weight() != Item.HEAVY)
+                {
+                    itemToPlace.add(new Pair<>(item, place));
+                }
+            }
+        }
+
+        if(itemToPlace.isEmpty()) { return "V prostorech se nenachází žádné zvednutelné předměty."; }
+
+        for(int i = 0; i < remainingBagCapacity; i++)
+        {
+            int randomIndex = randomGenerator.nextInt(itemToPlace.size());
+            Pair<IItem, IPlace> itemIPlacePair = itemToPlace.get(randomIndex);
+            IItem item = itemIPlacePair.getKey();
+            IPlace placeOfItem = itemIPlacePair.getValue();
+
+            itemsObtained.add(item.name());
+
+            placeOfItem.removeItem(item);
+            game.bag().addItem(item);
+
+            itemToPlace.remove(randomIndex);
+        }
+
+        StringBuilder sb = new StringBuilder();
+
+        for(String itemName : itemsObtained)
+        {
+            sb.append(itemName.toLowerCase());
+
+            if(!itemsObtained.get(itemsObtained.size() - 1).equals(itemName))
+            {
+                sb.append(", ");
+            }
+        }
+
+        return COMMAND_IDKFA_DESC + sb;
+    }
 
     /***************************************************************************
      * Metoda realizující akci Jdi.

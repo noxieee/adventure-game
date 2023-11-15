@@ -52,8 +52,10 @@ public class World implements IWorld
     /** Aktuální prostor, v němž se nachází hráč. */
     private Place currentPlace;
 
+    /** Určuje, zda je teleport již odemknutý. */
     private boolean teleportUnlocked;
 
+    /** Historie prostorů, jak jimi hráč procházel. */
     private final List<String> placeHistory = new ArrayList<>();
 
     /** Mapa observerů. */
