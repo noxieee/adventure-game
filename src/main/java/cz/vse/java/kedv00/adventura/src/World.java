@@ -52,6 +52,10 @@ public class World implements IWorld
     /** Aktuální prostor, v němž se nachází hráč. */
     private Place currentPlace;
 
+    private boolean teleportUnlocked;
+
+    private final List<String> placeHistory = new ArrayList<>();
+
     /** Mapa observerů. */
     private final Map<TypeOfChange, Set<Observer>> observerMap = new HashMap<>();
 
@@ -102,6 +106,8 @@ public class World implements IWorld
         {
             observerMap.put(typeOfChange, new HashSet<>());
         }
+
+        teleportUnlocked = false;
     }
 
     // INSTANCE METHODS ////////////////////////////////////////////////////////
@@ -179,6 +185,23 @@ public class World implements IWorld
         currentPlace = (Place)destinationRoom;
 
         notifyObservers(TypeOfChange.CHANGE_OF_PLACE);
+
+        if(placeHistory.size() == 4)
+        {
+            placeHistory.remove(0);
+            placeHistory.add(3, destinationRoom.name().toLowerCase());
+        }
+        else
+        {
+            placeHistory.add(destinationRoom.name().toLowerCase());
+        }
+
+        if(!teleportUnlocked && placeHistory.size() == 4 &&
+                placeHistory.get(0).equals(placeHistory.get(2)) && placeHistory.get(1).equals(placeHistory.get(3)))
+        {
+            teleportUnlocked = true;
+            notifyObservers(TypeOfChange.CHANGE_OF_TELEPORT_UNLOCKED);
+        }
     }
 
     /***************************************************************************
@@ -194,5 +217,10 @@ public class World implements IWorld
         }
 
         setCurrentPlace(START_PLACE);
+
+        placeHistory.clear();
+        teleportUnlocked = false;
+
+        notifyObservers(TypeOfChange.CHANGE_OF_TELEPORT_UNLOCKED);
     }
 }

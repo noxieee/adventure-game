@@ -38,8 +38,12 @@
                 <MenuItem mnemonicParsing="false" onAction="#newGame" text="Nová hra" />
                 <MenuItem mnemonicParsing="false" onAction="#showHelp" text="Nápověda" />
                 <MenuItem mnemonicParsing="false" onAction="#closeGame" text="Zavřít hru" />
-
             </items>
+          </Menu>
+          <Menu fx:id="secretMenu" mnemonicParsing="false" text="Tajné">
+             <items>
+                <MenuItem mnemonicParsing="false" onAction="#teleportPlayer" text="Teleport" />
+             </items>
           </Menu>
         </menus>
       </MenuBar>

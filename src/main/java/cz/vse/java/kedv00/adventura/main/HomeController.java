@@ -26,6 +26,10 @@ import static cz.vse.java.kedv00.adventura.src.Scenarios.*;
  */
 public class HomeController {
 
+    /** Tajné menu. */
+    @FXML
+    private Menu secretMenu;
+
     /** Panel itemů v prostoru. */
     @FXML
     private ListView<IItem> placeItemsPanel;
@@ -89,6 +93,9 @@ public class HomeController {
         game.bag().registerObserver(TypeOfChange.CHANGE_OF_BAG_ITEMS,
                 () -> updateItemsPanels());
 
+        game.world().registerObserver(TypeOfChange.CHANGE_OF_TELEPORT_UNLOCKED,
+                () -> updateSecretMenuVisibility());
+
         updateLocationPanel();
         updateItemsPanels();
 
@@ -102,6 +109,13 @@ public class HomeController {
         locationPanel.setCellFactory(param -> new ListCellPlace());
         bagItemsPanel.setCellFactory(param -> new ListCellItem());
         placeItemsPanel.setCellFactory(param -> new ListCellItem());
+
+        secretMenu.setVisible(false);
+    }
+
+    private void updateSecretMenuVisibility()
+    {
+        secretMenu.setVisible(true);
     }
 
     /***************************************************************
@@ -285,5 +299,10 @@ public class HomeController {
             consoleOutput.clear();
             initialize();
         }
+    }
+
+    public void teleportPlayer(ActionEvent actionEvent)
+    {
+
     }
 }
