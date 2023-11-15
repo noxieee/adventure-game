@@ -2,6 +2,8 @@ package cz.vse.java.kedv00.adventura.main;
 
 import cz.vse.java.kedv00.adventura.api.*;
 import cz.vse.java.kedv00.adventura.src.Game;
+import javafx.animation.Animation;
+import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.util.*;
 
@@ -24,6 +27,7 @@ import static cz.vse.java.kedv00.adventura.src.Scenarios.*;
  */
 public class HomeController {
 
+    /** Random generator */
     private final Random randomGenerator = new Random();
 
     /** Tajné menu. */
@@ -111,8 +115,20 @@ public class HomeController {
         placeItemsPanel.setCellFactory(param -> new ListCellItem());
 
         secretMenu.setVisible(false);
+
+        ScaleTransition st = new ScaleTransition();
+        st.setAutoReverse(true);
+        st.setCycleCount(Animation.INDEFINITE);
+        st.setDuration(Duration.millis(500.0));
+        st.setByX(0.2);
+        st.setByY(0.2);
+        st.setNode(playerIcon);
+        st.play();
     }
 
+    /************************************************************************
+     * Metoda, která udělá tajné menu visible.
+     */
     private void updateSecretMenuVisibility()
     {
         secretMenu.setVisible(true);
@@ -301,6 +317,9 @@ public class HomeController {
         }
     }
 
+    /************************************************************************
+     * Metoda, která teleportne hráče do náhodného prostoru.
+     */
     public void teleportPlayer(ActionEvent actionEvent)
     {
         List<IPlace> allPlaces = new ArrayList<>(game.world().places());
