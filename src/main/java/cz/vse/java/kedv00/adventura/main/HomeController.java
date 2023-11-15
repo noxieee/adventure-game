@@ -15,9 +15,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import static cz.vse.java.kedv00.adventura.src.Scenarios.*;
 
@@ -25,6 +23,8 @@ import static cz.vse.java.kedv00.adventura.src.Scenarios.*;
  * Třída zajišťující správu UI prvků
  */
 public class HomeController {
+
+    private final Random randomGenerator = new Random();
 
     /** Tajné menu. */
     @FXML
@@ -303,6 +303,15 @@ public class HomeController {
 
     public void teleportPlayer(ActionEvent actionEvent)
     {
+        List<IPlace> allPlaces = new ArrayList<>(game.world().places());
+        allPlaces.remove(game.world().currentPlace());
 
+        int randomIndex = randomGenerator.nextInt(allPlaces.size());
+        IPlace randomPlace = allPlaces.get(randomIndex);
+
+        game.world().setCurrentPlace(randomPlace);
+
+        consoleOutput.appendText("> " + "TELEPORT" + "\n\n");
+        consoleOutput.appendText("Byl jsi teleportován do náhodného prostoru: " + randomPlace.name() + "\n\n");
     }
 }
